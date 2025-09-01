@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التوثيق - عنان</title>
+
+    <!-- مشترك -->
+
+    <!-- خاص بالتوثيق -->
+    <link rel="stylesheet" href="documentation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-container">
+                <img src="img/لوغو فاتح.png" alt="لوغو عنان" class="logo-image">
+            </div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="quotations.html">الاقتباسات</a></li>
+                    <li><a href="summary.html">التلخيص</a></li>
+                    <li><a href="#documentation">التوثيق</a></li>
+                    <li><a href="videos.html">الفيديوهات</a></li>
+                    <li><a href="team.html">أعضاء الفريق</a></li>
+                </ul>
+            </nav>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="page-header">
+                <h2>توثيق فريق عنان   </h2>
+               
+            </div>
+
+            <!-- شبكة صور موحدة -->
+            <section id="documentation" class="doc-section" aria-label="شبكة التوثيق">
+                <div class="doc-gallery">
+                 
+                  
+                    <figure class="doc-item">
+                        <img src="توثيق/5881919504299183166_121.jpg" alt="توثيق - صورة 8">
+                    </figure>
+                    <figure class="doc-item">
+                        <img src="توثيق/5881919504299183154_119.jpg" alt="توثيق - صورة 9">
+                    </figure>
+                    <figure class="doc-item">
+                        <img src="توثيق/5881919504299183152_119.jpg" alt="توثيق - صورة 10">
+                    </figure>
+
+                    <figure class="doc-item">
+                        <img src="توثيق/5884171304112868509_121.jpg" alt="توثيق - صورة 1">
+                    </figure>
+                    <figure class="doc-item">
+                        <img src="توثيق/5884171304112868408_121.jpg" alt="توثيق - صورة 2">
+                    </figure>
+                    <figure class="doc-item">
+                        <img src="توثيق/5884171304112868407_121.jpg" alt="توثيق - صورة 3">
+                    </figure>
+                    <figure class="doc-item">
+                        <img src="توثيق/5884171304112868384_121.jpg" alt="توثيق - صورة 4">
+                    </figure>
+                    <figure class="doc-item">
+                        <img src="توثيق/5884171304112868307_121.jpg" alt="توثيق - صورة 5">
+                    </figure>
+                    <figure class="doc-item">
+                        <img src="توثيق/5884076350975888555_121.jpg" alt="توثيق - صورة 6">
+                    </figure>
+                    <figure class="doc-item">
+                        <img src="توثيق/5881919504299183180_121.jpg" alt="توثيق - صورة 7">
+                    </figure>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    < <footer class="footer" id="contact">
+ 
+        <div class="social-links">
+          <a href="https://t.me/al3nan_12" target="_blank" class="social-link">
+            <i class="fab fa-telegram"></i>
+          </a>
+          <a href="https://x.com/alananteam" target="_blank" class="social-link">
+            <i class="fab fa-x-twitter"></i>
+          </a>
+          <a href="https://www.instagram.com/alanan.team?igsh=MXFweW5kN3dwYnZsNA%3D%3D" target="_blank" class="social-link">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <p class="copyright">
+      <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank">
+        جميع الحقوق محفوظة © 2025 Mawadda Alnaal
+      </a>
+    </p>
+    
+  </div>
+</footer>
+
+ 
+  <script>
+    // JavaScript للتحكم في قائمة الموبايل
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navList = document.querySelector('.nav ul');
+      
+      menuToggle.addEventListener('click', function() {
+        navList.classList.toggle('show');
+      });
+      
+      // تأثير التمرير للفيديوهات
+      const reels = document.querySelectorAll('.reel');
+      
+      function checkScroll() {
+        reels.forEach((reel, index) => {
+          const reelTop = reel.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          
+          if (reelTop < windowHeight - 100) {
+            setTimeout(() => {
+              reel.classList.add('animate');
+            }, index * 200);
+          }
+        });
+      }
+      
+      // التحقق عند التحميل وعند التمرير
+      checkScroll();
+      window.addEventListener('scroll', checkScroll);
+    });
+  </script>
+</body>
+</html>

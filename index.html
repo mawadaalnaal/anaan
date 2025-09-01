@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>عنان - الصفحة الرئيسية</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+</head>
+<body>
+  <!-- الهيدر -->
+  <header class="header">
+    <div class="container">
+      <div class="logo-container">
+        <img src="img/لوغو فاتح.png" alt="لوغو عنان" class="logo-image">
+       
+      </div>
+      
+      <!-- زر القائمة للموبايل -->
+      <button class="nav-toggle" aria-label="فتح القائمة">
+        <span class="hamburger"></span>
+      </button>
+      
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="#home">الرئيسية</a></li>
+          <li><a href="#about">من نحن</a></li>
+          <li><a href="#services">خدماتنا</a></li>
+          <li><a href="#contact">اتصل بنا</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- المحتوى -->
+  <main class="main" id="home">
+    <div class="container">
+      <!-- الغلاف -->
+      <section class="hero-section">
+        <div class="hero-box">
+          <div class="hero-cover">
+            <picture>
+                <!-- صورة للموبايل -->
+                <source
+                  srcset="img/غلاف%20حجم%20موبايل.png"
+                  media="(max-width: 768px)"
+                  type="image/png"
+                >
+                <!-- صورة للديسكتوب -->
+                <img src="img/غلاف.png" alt="غلاف عنان" class="cover-image">
+              </picture>
+              
+          </div>
+        </div>
+      </section>
+
+      <!-- قسم من نحن -->
+      <section class="about-section" id="about">
+        <div class="container">
+          <h2 class="section-title">من نحن</h2>
+          <div class="about-content">
+          
+              <h2>عنان: فريق ضمن المسابقة الكبرى  </h2>
+              <p> نسجنا النجوم سلاح السمو لنركب سرج العلا في أمان<br>
+            
+                 سباق طويل طوى جهدنا فهيا تأهب وأطلق عنان. <br>
+                  عنان، وما سميناه عنانًا إلا لأنّا نأنف من الحضيض، ونعرض عن السفوح، ونتطلع إلى القمم العالية حيث لا ينالها إلا من صبر كما يصبر الطائر على مكابدة الريح، وسعى كما تسعى الجداول في مدارجها حتى تلتحق بالبحر. ونحن فيه كالصقر لا يرضى إلا بالذرى ولا يعرف مقامًا سوى المعالي؛ إذا انقض أرعب، وإذا ارتفع ملأ الفضاء مهابة وجلال.
+
+                إنا في هذه المسابقة الكبرى ندخل دخولًا لا تردد فيه، ونسلك طريقًا لا موضع فيه للكسالى؛ قد علمنا أن الطريق عسير، وأن الميدان لا يعرف الرفق بالضعيف، ولكنا على يقين أن النصر قرين العزيمة، وأن السماء لا تعطي عنانها لمن مد يده باردة.
+                
+                فإن رأيتمونا فاعلموا أنكم ترون سحابًا متراكمًا يبرق ويرعد، يظلّل من شاء ويمطر حيث شاء، وإن سمعتمونا فاعلموا أنكم تسمعون رعدًا لا يشبه الهمس وهديرًا لا يخالطه وهن، وإن أبصرتمونا فسترون صقورًا محلّقة لا يثنيها طول جهد ولا يرجعها خوف، تحلّق بثبات حتى تعانق العنان وتستوي على معارج الأمجاد.
+                
+                 وقد قيل، وهو شعارنا في كل ميدان: <br>
+                
+                نَحْنُ أُناسٌ لا تَوَسُّطَ عِندَنا
+                لَنا الصَّدْرُ دونَ العالَمينَ أو القَبْر <br>
+                
+                فليتهيأ المنافسون وليشدوا عقدهم، فإن عنان إن أطل حجب الأبصار بعلوه، وإن ارتفع ملأ الساحة أثرًا، كما الصقر إذا طاف بالسماء لا يترك خلفه إلا مجدًا وسؤددًا.</p>
+            
+    
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- الكروت -->
+      <section class="cards-section" id="services">
+        <h2 class="section-title">خدماتنا</h2>
+        <div class="cards-grid">
+          <div class="card" onclick="window.location.href='quotations.html'">
+            <div class="card-icon"><i class="fas fa-quote-left"></i></div>
+            <h3>الاقتباسات</h3>
+          
+          </div>
+          <div class="card" onclick="window.location.href='summary.html'">
+            <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+            <h3>التلخيص</h3>
+         
+          </div>
+          <div class="card" onclick="window.location.href='documentation.html'">
+            <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+            <h3>التوثيق</h3>
+          
+          </div>
+          <div class="card" onclick="window.location.href='videos.html'">
+            <div class="card-icon"><i class="fas fa-play-circle"></i></div>
+            <h3>الفيديوهات</h3>
+      
+          </div>
+          <div class="card" onclick="window.location.href='team.html'">
+            <div class="card-icon"><i class="fas fa-users"></i></div>
+            <h3>أعضاء الفريق</h3>
+       
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- الفوتر -->
+  <footer class="footer" id="contact">
+ 
+          <div class="social-links">
+            <a href="https://t.me/al3nan_12" target="_blank" class="social-link">
+              <i class="fab fa-telegram"></i>
+            </a>
+            <a href="https://x.com/alananteam" target="_blank" class="social-link">
+              <i class="fab fa-x-twitter"></i>
+            </a>
+            <a href="https://www.instagram.com/alanan.team?igsh=MXFweW5kN3dwYnZsNA%3D%3D" target="_blank" class="social-link">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <p class="copyright">
+        <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank">
+          جميع الحقوق محفوظة © 2025 Mawadda Alnaal
+        </a>
+      </p>
+      
+    </div>
+  </footer>
+
+  <script>
+    // JavaScript للتحكم في قائمة الموبايل
+    document.addEventListener('DOMContentLoaded', function() {
+      const navToggle = document.querySelector('.nav-toggle');
+      const nav = document.querySelector('.nav');
+      
+      navToggle.addEventListener('click', function() {
+        nav.classList.toggle('nav-open');
+        navToggle.classList.toggle('active');
+      });
+      
+      // إغلاق القائمة عند النقر على رابط
+      const navLinks = document.querySelectorAll('.nav a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+          nav.classList.remove('nav-open');
+          navToggle.classList.remove('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>

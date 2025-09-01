@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الفيديوهات - عنان</title>
+ <link rel="stylesheet" href="videos.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- خط Tajawal للعربية -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- الهيدر -->
+  <header class="header">
+    <div class="container">
+      <div class="logo-container">
+        <img src="img/لوغو فاتح.png" alt="لوغو عنان" class="logo-image">
+      
+      </div>
+      <nav class="nav">
+        <ul>
+          <li><a href="index.html">الرئيسية</a></li>
+          <li><a href="quotations.html">الاقتباسات</a></li>
+          <li><a href="summary.html">التلخيص</a></li>
+          <li><a href="documentation.html">التوثيق</a></li>
+          <li><a href="videos.html" class="active">الفيديوهات</a></li>
+          <li><a href="team.html">أعضاء الفريق</a></li>
+        </ul>
+      </nav>
+      <div class="menu-toggle"><i class="fa-solid fa-bars"></i></div>
+
+    </div>
+  </header>
+
+  <main class="main" id="videos">
+    <div class="container">
+      <div class="page-header">
+        <h2>فيديوهات</h2>
+      
+      </div>
+
+      <!-- شبكة الفيديوهات -->
+      <div class="videos-grid">
+        <!-- فيديو 1 -->
+        <div class="reel">
+          <div class="reel-content">
+            <video
+              src="فيديوهات/5884171303656627618.mp4"
+              poster="فيديوهات/5884171303656627618.jpg"
+              controls
+              playsinline
+              preload="metadata"
+              muted>
+            </video>
+            <div class="reel-overlay">
+        
+            
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- أزرار بسيطة اختيارية -->
+      <div class="reel-actions">
+        <button class="reel-btn" aria-label="إعجاب"><i class="fa-regular fa-heart"></i></button>
+        <button class="reel-btn" aria-label="تعليق"><i class="fa-regular fa-comment"></i></button>
+        <a class="reel-btn" aria-label="تحميل" href="فيديوهات/1.mp4" download><i class="fa-solid fa-download"></i></a>
+      </div>
+
+      <!-- رابط احتياطي لو المتصفح ما دعم الفيديو -->
+      <p class="reel-fallback">
+        إذا لم تعمل الفيديوهات، يمكنك <a href="فيديوهات/1.mp4" download>تحميلها مباشرة</a>.
+      </p>
+    </div>
+  </main>
+  <footer class="footer" id="contact">
+ 
+    <div class="social-links">
+      <a href="https://t.me/al3nan_12" target="_blank" class="social-link">
+        <i class="fab fa-telegram"></i>
+      </a>
+      <a href="https://x.com/alananteam" target="_blank" class="social-link">
+        <i class="fab fa-x-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com/alanan.team?igsh=MXFweW5kN3dwYnZsNA%3D%3D" target="_blank" class="social-link">
+        <i class="fab fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+</div>
+
+<p class="copyright">
+  <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank">
+    جميع الحقوق محفوظة © 2025 Mawadda Alnaal
+  </a>
+</p>
+
+</div>
+</footer>
+  <script>
+    // JavaScript للتحكم في قائمة الموبايل
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navList = document.querySelector('.nav ul');
+      
+      menuToggle.addEventListener('click', function() {
+        navList.classList.toggle('show');
+      });
+      
+      // تأثير التمرير للفيديوهات
+      const reels = document.querySelectorAll('.reel');
+      
+      function checkScroll() {
+        reels.forEach((reel, index) => {
+          const reelTop = reel.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+          
+          if (reelTop < windowHeight - 100) {
+            setTimeout(() => {
+              reel.classList.add('animate');
+            }, index * 200);
+          }
+        });
+      }
+      
+      // التحقق عند التحميل وعند التمرير
+      checkScroll();
+      window.addEventListener('scroll', checkScroll);
+    });
+  </script>
+</body>
+</html>
