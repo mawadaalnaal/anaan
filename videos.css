@@ -107,11 +107,13 @@ body {
   animation: fadeInUp 1s ease forwards;
 }
 
-.page-header h2 {
-  font-size: 2.5rem;
-  color: #1a2a6c;
-  margin-bottom: 1rem;
-}
+.page-header {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #000d2a;
+    border-radius: 15px;
+  }
+  
 
 .page-header p {
   font-size: 1.2rem;
