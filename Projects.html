@@ -1,36 +1,43 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- CSP خاصة بصفحة المشاريع -->
   <meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  base-uri 'self';
-  img-src 'self' data: https:;
-  script-src 'self';
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com;
-  font-src 'self' data: https://fonts.gstatic.com https://mawadaalnaal.github.io;
-  connect-src 'self';
-  frame-ancestors 'none';
-  upgrade-insecure-requests;
-">
-
+    default-src 'self';
+    base-uri 'self';
+    img-src 'self' data: https:;
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://mawadaalnaal.github.io;
+    frame-src 'self' blob: data:;
+    connect-src 'self';
+    object-src 'none';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+  ">
 
   <title>مشاريع - عنان</title>
 
+  <!-- خط Amiri -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (مرة واحدة فقط) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+  <!-- ملفات التنسيقات المحلية -->
   <link rel="stylesheet" href="summary.css">
   <link rel="stylesheet" href="Projects.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <!-- الهيدر -->
   <header class="header">
     <div class="container">
       <div class="logo-container">
-        <img src="img/لوغو فاتح.png" alt="لوغو عنان" class="logo-image">
+        <img src="img/لوغو%20فاتح.png" alt="لوغو عنان" class="logo-image">
       </div>
       <nav class="nav">
         <ul>
@@ -39,12 +46,12 @@
           <li><a href="summary.html">التلخيص</a></li>
           <li><a href="documentation.html">التوثيق</a></li>
           <li><a href="videos.html">الفيديوهات</a></li>
-          <li><a href="tahfizat.html"> تحفيزات</a></li>
-          <li><a href="#Projects"> مشاريع</a></li>
+          <li><a href="tahfizat.html">تحفيزات</a></li>
+          <li><a href="projects.html">مشاريع</a></li>
           <li><a href="team.html">أعضاء الفريق</a></li>
         </ul>
       </nav>
-      <div class="menu-toggle"><i class="fa-solid fa-bars"></i></div>
+      <button class="menu-toggle" aria-label="فتح القائمة"><i class="fa-solid fa-bars"></i></button>
     </div>
   </header>
 
@@ -53,15 +60,27 @@
     <h2 class="projects-title">مشاريع</h2>
     <div class="projects-grid">
 
-      <!-- كارت -->
+      <!-- كارت مشروع مثال -->
       <article class="project-card">
-        <img src="مشاريع/مشروع 1.jpg" class="project-image" alt="مشروع 1">
+        <img src="مشاريع/مشروع%201.jpg" class="project-image" alt="مشروع 1">
         <div class="project-actions">
           <button class="btn view-btn" data-pdf="مشاريع/مشروع1.pdf">
             <i class="fa-solid fa-eye"></i> مشاهدة وتحميل
           </button>
         </div>
       </article>
+
+      <!-- بإمكانك تكرار الكارت وتغيير المسارات للأعمال الأخرى -->
+      <!--
+      <article class="project-card">
+        <img src="projects/project-2.jpg" class="project-image" alt="مشروع 2">
+        <div class="project-actions">
+          <button class="btn view-btn" data-pdf="projects/project-2.pdf">
+            <i class="fa-solid fa-eye"></i> مشاهدة وتحميل
+          </button>
+        </div>
+      </article>
+      -->
 
     </div>
   </section>
@@ -81,9 +100,9 @@
         </div>
       </div>
       <div class="pdf-modal__body">
-        <iframe id="pdfViewer" class="pdf-frame" src=""></iframe>
+        <iframe id="pdfViewer" class="pdf-frame" src="" title="PDF Viewer"></iframe>
         <p style="padding:10px">
-          إذا لم يظهر الملف يمكنك 
+          إذا لم يظهر الملف يمكنك
           <a id="fallbackDownload" href="#" download>تحميله من هنا</a>.
         </p>
       </div>
@@ -93,18 +112,12 @@
   <!-- الفوتر -->
   <footer class="footer" id="contact">
     <div class="social-links">
-      <a href="https://t.me/al3nan_12" target="_blank" class="social-link">
-        <i class="fab fa-telegram"></i>
-      </a>
-      <a href="https://x.com/alananteam" target="_blank" class="social-link">
-        <i class="fab fa-x-twitter"></i>
-      </a>
-      <a href="https://www.instagram.com/alanan.team" target="_blank" class="social-link">
-        <i class="fab fa-instagram"></i>
-      </a>
+      <a href="https://t.me/al3nan_12" target="_blank" class="social-link" rel="noopener"><i class="fab fa-telegram"></i></a>
+      <a href="https://x.com/alananteam" target="_blank" class="social-link" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com/alanan.team" target="_blank" class="social-link" rel="noopener"><i class="fab fa-instagram"></i></a>
     </div>
     <p class="copyright">
-      <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank">
+      <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank" rel="noopener">
         جميع الحقوق محفوظة © 2025 Mawadda Alnaal
       </a>
     </p>
@@ -112,24 +125,24 @@
 
   <script>
     // قائمة الموبايل
-    document.querySelector('.menu-toggle').addEventListener('click', ()=>{
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
       document.querySelector('.nav ul').classList.toggle('show');
     });
 
-    // زر مشاهدة وتحميل
-    document.querySelectorAll('.view-btn').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
+    // زر مشاهدة وتحميل (فتح PDF)
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
         const pdfUrl = btn.getAttribute('data-pdf');
 
-        // موبايل أو iOS → افتح تبويب جديد
+        // iOS أو شاشة صغيرة → افتح تبويب جديد
         const isSmall = window.matchMedia('(max-width:640px)').matches;
         const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
-        if(isSmall || isIOS){
+        if (isSmall || isIOS) {
           window.open(pdfUrl, '_blank', 'noopener');
           return;
         }
 
-        // لابتوب → افتح بالمودال
+        // لابتوب/ديسكتوب → افتح بالمودال
         const modal = document.getElementById('pdfModal');
         const viewer = document.getElementById('pdfViewer');
         const modalDownload = document.getElementById('modalDownloadBtn');
@@ -140,26 +153,29 @@
         fallbackDownload.setAttribute('href', pdfUrl);
 
         modal.classList.add('show');
-        modal.setAttribute('aria-hidden','false');
-        document.body.style.overflow='hidden';
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
       });
     });
 
     // إغلاق المودال
-    function closePdfModal(){
-      const modal=document.getElementById('pdfModal');
-      const viewer=document.getElementById('pdfViewer');
+    function closePdfModal() {
+      const modal = document.getElementById('pdfModal');
+      const viewer = document.getElementById('pdfViewer');
       modal.classList.remove('show');
-      modal.setAttribute('aria-hidden','true');
-      viewer.setAttribute('src','');
-      document.body.style.overflow='';
+      modal.setAttribute('aria-hidden', 'true');
+      viewer.setAttribute('src', '');
+      document.body.style.overflow = '';
     }
+
     document.getElementById('modalCloseBtn').addEventListener('click', closePdfModal);
-    document.getElementById('pdfModal').addEventListener('click', e=>{
-      if(e.target.id==='pdfModal') closePdfModal();
+
+    document.getElementById('pdfModal').addEventListener('click', e => {
+      if (e.target.id === 'pdfModal') closePdfModal();
     });
-    document.addEventListener('keydown', e=>{
-      if(e.key==='Escape') closePdfModal();
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closePdfModal();
     });
   </script>
 </body>
