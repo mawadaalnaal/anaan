@@ -15,7 +15,7 @@
     style-src 'self' 'unsafe-inline' https:;
     style-src-elem 'self' 'unsafe-inline' https:;
     font-src 'self' data: https:;
-    frame-src 'self' blob: data:;
+    frame-src 'self' blob: data: https://drive.google.com https://docs.google.com;
     connect-src 'self';
     object-src 'none';
     frame-ancestors 'none';
@@ -34,7 +34,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-  <!-- ملفات التنسيقات المحلية (تأكد من صحة الأسماء والمسارات) -->
+  <!-- ملفات التنسيقات المحلية -->
   <link rel="stylesheet" href="summary.css">
   <link rel="stylesheet" href="Projects.css">
 </head>
@@ -66,30 +66,38 @@
     <h2 class="projects-title">مشاريع</h2>
     <div class="projects-grid">
 
-      <!-- كارت مشروع -->
+      <!-- كارت مشروع (مشبوك على Google Drive) -->
       <article class="project-card">
-        <!-- ملاحظة: لأن اسم الملف فيه مسافة، يجب ترميزها بـ %20 -->
         <img src="مشاريع/مشروع%201.jpg" class="project-image" alt="مشروع 1">
         <div class="project-actions">
-          <!-- عدّلنا اسم الـPDF إلى project-1.pdf حسب ما ذكرت -->
-          <a class="btn" href="مشاريع/project-1.pdf" download>
+          <!-- تحميل مباشر من درايف -->
+          <a class="btn"
+             href="https://drive.google.com/uc?export=download&id=1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt"
+             download>
             <i class="fa-solid fa-download"></i> تحميل
           </a>
 
-          <!-- زر عرض داخل مودال -->
-          <button type="button" class="btn view-btn" data-pdf="مشاريع/project-1.pdf" aria-label="مشاهدة">
+          <!-- مشاهدة داخل المودال عبر preview -->
+          <button type="button" class="btn view-btn"
+                  data-pdf="https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/preview"
+                  aria-label="مشاهدة">
             <i class="fa-solid fa-eye"></i> مشاهدة
           </button>
         </div>
       </article>
 
-      <!-- يمكنك تكرار الكارت لمشاريع أخرى مع تغيير المسارات -->
-      <!--
+      <!-- نموذج للتكرار مع مشروع آخر (بدّل المعرف فقط)
       <article class="project-card">
         <img src="مشاريع/مشروع%202.jpg" class="project-image" alt="مشروع 2">
         <div class="project-actions">
-          <a class="btn" href="مشاريع/project-2.pdf" download><i class="fa-solid fa-download"></i> تحميل</a>
-          <button type="button" class="btn view-btn" data-pdf="مشاريع/project-2.pdf"><i class="fa-solid fa-eye"></i> مشاهدة</button>
+          <a class="btn" href="https://drive.google.com/uc?export=download&id=PUT_FILE_ID_HERE" download>
+            <i class="fa-solid fa-download"></i> تحميل
+          </a>
+          <button type="button" class="btn view-btn"
+                  data-pdf="https://drive.google.com/file/d/PUT_FILE_ID_HERE/preview"
+                  aria-label="مشاهدة">
+            <i class="fa-solid fa-eye"></i> مشاهدة
+          </button>
         </div>
       </article>
       -->
@@ -112,7 +120,7 @@
         </div>
       </div>
       <div class="pdf-modal__body">
-        <iframe id="pdfViewer" class="pdf-frame" src="" title="PDF Viewer"></iframe>
+        <iframe id="pdfViewer" class="pdf-frame" src="" title="PDF Viewer" allow="fullscreen"></iframe>
         <p style="padding:10px">
           إذا لم يظهر الملف يمكنك
           <a id="fallbackDownload" href="#" download>تحميله من هنا</a>.
@@ -153,8 +161,21 @@
     const fallbackDownload = document.getElementById('fallbackDownload');
     const closeBtn         = document.getElementById('modalCloseBtn');
 
-    // فحص وجود الملف قبل الفتح لتجنب مودال فارغ
+    // هل الرابط من نفس الأصل؟
+    function isSameOrigin(url) {
+      try {
+        const u = new URL(url, window.location.href);
+        return u.origin === window.location.origin;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    // فحص وجود الملف فقط للروابط المحلية (تجنّب CORS مع الروابط الخارجية مثل درايف)
     async function exists(url) {
+      if (!isSameOrigin(url)) {
+        return true; // اعتبره موجوداً عند كونه خارجي
+      }
       try {
         const r = await fetch(url, { method: 'HEAD' });
         return r.ok;
@@ -164,10 +185,10 @@
       }
     }
 
-    function openPdfModal(pdfUrl) {
-      viewer.setAttribute('src', pdfUrl);
-      modalDownload.setAttribute('href', pdfUrl);
-      fallbackDownload.setAttribute('href', pdfUrl);
+    function openPdfModal(pdfPreviewUrl, downloadUrl) {
+      viewer.setAttribute('src', pdfPreviewUrl);
+      modalDownload.setAttribute('href', downloadUrl || pdfPreviewUrl);
+      fallbackDownload.setAttribute('href', downloadUrl || pdfPreviewUrl);
       modal.classList.add('show');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -196,29 +217,32 @@
       if (!btn) return;
 
       e.preventDefault();
-      const pdfUrl = btn.getAttribute('data-pdf');
-      if (!pdfUrl) {
+      const pdfPreviewUrl = btn.getAttribute('data-pdf');
+      if (!pdfPreviewUrl) {
         console.warn('data-pdf مفقود على الزر', btn);
         return;
       }
+
+      // إن وُجد data-download استخدمه للتحميل داخل المودال
+      const dataDownload = btn.getAttribute('data-download');
 
       // فتح تبويب جديد على الشاشات الصغيرة / iOS
       const isSmall = window.matchMedia('(max-width:640px)').matches;
       const isIOS   = /iPad|iPhone|iPod/i.test(navigator.userAgent);
 
-      const ok = await exists(pdfUrl);
+      const ok = await exists(pdfPreviewUrl);
       if (!ok) {
         alert('تعذّر العثور على الملف. تحقق من الاسم/المسار (حسّاس لحالة الأحرف).');
-        console.error('404 for', pdfUrl);
+        console.error('404 for', pdfPreviewUrl);
         return;
       }
 
       if (isSmall || isIOS) {
-        window.open(pdfUrl, '_blank', 'noopener');
+        window.open(pdfPreviewUrl, '_blank', 'noopener');
         return;
       }
 
-      openPdfModal(pdfUrl);
+      openPdfModal(pdfPreviewUrl, dataDownload);
     });
   });
   </script>
