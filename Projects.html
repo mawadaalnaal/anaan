@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- CSP خاصة بصفحة المشاريع -->
+  <!-- سياسة الأمان CSP -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
@@ -25,7 +25,7 @@
   <!-- خط Amiri -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome (مرة واحدة فقط) -->
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
   <!-- ملفات التنسيقات المحلية -->
@@ -64,23 +64,11 @@
       <article class="project-card">
         <img src="مشاريع/مشروع%201.jpg" class="project-image" alt="مشروع 1">
         <div class="project-actions">
-          <button class="btn view-btn" data-pdf="مشاريع/مشروع1.pdf">
+          <button type="button" class="btn view-btn" data-pdf="مشاريع/مشروع1.pdf">
             <i class="fa-solid fa-eye"></i> مشاهدة وتحميل
           </button>
         </div>
       </article>
-
-      <!-- بإمكانك تكرار الكارت وتغيير المسارات للأعمال الأخرى -->
-      <!--
-      <article class="project-card">
-        <img src="projects/project-2.jpg" class="project-image" alt="مشروع 2">
-        <div class="project-actions">
-          <button class="btn view-btn" data-pdf="projects/project-2.pdf">
-            <i class="fa-solid fa-eye"></i> مشاهدة وتحميل
-          </button>
-        </div>
-      </article>
-      -->
 
     </div>
   </section>
@@ -123,60 +111,95 @@
     </p>
   </footer>
 
+  <!-- سكربت -->
   <script>
+  document.addEventListener('DOMContentLoaded', () => {
     // قائمة الموبايل
-    document.querySelector('.menu-toggle').addEventListener('click', () => {
-      document.querySelector('.nav ul').classList.toggle('show');
-    });
-
-    // زر مشاهدة وتحميل (فتح PDF)
-    document.querySelectorAll('.view-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const pdfUrl = btn.getAttribute('data-pdf');
-
-        // iOS أو شاشة صغيرة → افتح تبويب جديد
-        const isSmall = window.matchMedia('(max-width:640px)').matches;
-        const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
-        if (isSmall || isIOS) {
-          window.open(pdfUrl, '_blank', 'noopener');
-          return;
-        }
-
-        // لابتوب/ديسكتوب → افتح بالمودال
-        const modal = document.getElementById('pdfModal');
-        const viewer = document.getElementById('pdfViewer');
-        const modalDownload = document.getElementById('modalDownloadBtn');
-        const fallbackDownload = document.getElementById('fallbackDownload');
-
-        viewer.setAttribute('src', pdfUrl);
-        modalDownload.setAttribute('href', pdfUrl);
-        fallbackDownload.setAttribute('href', pdfUrl);
-
-        modal.classList.add('show');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+    const menuToggle = document.querySelector('.menu-toggle');
+    if (menuToggle) {
+      menuToggle.addEventListener('click', () => {
+        const navList = document.querySelector('.nav ul');
+        if (navList) navList.classList.toggle('show');
       });
-    });
+    }
+
+    const modal            = document.getElementById('pdfModal');
+    const viewer           = document.getElementById('pdfViewer');
+    const modalDownload    = document.getElementById('modalDownloadBtn');
+    const fallbackDownload = document.getElementById('fallbackDownload');
+    const closeBtn         = document.getElementById('modalCloseBtn');
+
+    // فحص وجود الملف
+    async function exists(url) {
+      try {
+        const r = await fetch(url, { method: 'HEAD' });
+        return r.ok;
+      } catch (e) {
+        console.error('Fetch HEAD failed for', url, e);
+        return false;
+      }
+    }
+
+    // فتح المودال
+    function openPdfModal(pdfUrl) {
+      viewer.setAttribute('src', pdfUrl);
+      modalDownload.setAttribute('href', pdfUrl);
+      fallbackDownload.setAttribute('href', pdfUrl);
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
 
     // إغلاق المودال
     function closePdfModal() {
-      const modal = document.getElementById('pdfModal');
-      const viewer = document.getElementById('pdfViewer');
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden', 'true');
       viewer.setAttribute('src', '');
       document.body.style.overflow = '';
     }
 
-    document.getElementById('modalCloseBtn').addEventListener('click', closePdfModal);
-
-    document.getElementById('pdfModal').addEventListener('click', e => {
-      if (e.target.id === 'pdfModal') closePdfModal();
-    });
-
-    document.addEventListener('keydown', e => {
+    if (closeBtn) closeBtn.addEventListener('click', closePdfModal);
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closePdfModal();
+      });
+    }
+    document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closePdfModal();
     });
+
+    // تفويض أحداث للأزرار
+    document.body.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.view-btn');
+      if (!btn) return;
+      e.preventDefault();
+
+      const pdfUrl = btn.getAttribute('data-pdf');
+      if (!pdfUrl) {
+        console.warn('data-pdf مفقود');
+        return;
+      }
+
+      // موبايل/iOS → افتح تبويب جديد
+      const isSmall = window.matchMedia('(max-width:640px)').matches;
+      const isIOS   = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+
+      const ok = await exists(pdfUrl);
+      if (!ok) {
+        alert('تعذّر العثور على الملف. تحقق من الاسم/المسار.');
+        console.error('404 for', pdfUrl);
+        return;
+      }
+
+      if (isSmall || isIOS) {
+        window.open(pdfUrl, '_blank', 'noopener');
+        return;
+      }
+
+      // سطح مكتب → مودال
+      openPdfModal(pdfUrl);
+    });
+  });
   </script>
 </body>
 </html>
