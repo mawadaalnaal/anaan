@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- تعطيل الترجمة التلقائية لتقليل طلبات gstatic -->
+  <meta name="google" content="notranslate" />
 
-  <!-- سياسة الأمان CSP -->
+  <!-- سياسة الأمان CSP: ضعها أول عنصر داخل <head> ولا تكرر أي وسم CSP آخر -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
     img-src 'self' data: https:;
     script-src 'self' 'unsafe-inline';
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-    style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-    font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://mawadaalnaal.github.io;
+    style-src 'self' 'unsafe-inline' https:;
+    style-src-elem 'self' 'unsafe-inline' https:;
+    font-src 'self' data: https:;
     frame-src 'self' blob: data:;
     connect-src 'self';
     object-src 'none';
@@ -22,13 +24,17 @@
 
   <title>مشاريع - عنان</title>
 
+  <!-- تحسين تحميل الخطوط -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <!-- خط Amiri -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-  <!-- ملفات التنسيقات المحلية -->
+  <!-- ملفات التنسيقات المحلية (تأكد من صحة الأسماء والمسارات) -->
   <link rel="stylesheet" href="summary.css">
   <link rel="stylesheet" href="Projects.css">
 </head>
@@ -60,18 +66,33 @@
     <h2 class="projects-title">مشاريع</h2>
     <div class="projects-grid">
 
-      <!-- كارت مشروع مثال -->
+      <!-- كارت مشروع -->
       <article class="project-card">
-            <!-- الصورة لسه اسمها مشروع 1.jpg -->
-             <img src="مشاريع/مشروع%201.jpg" class="project-image" alt="مشروع 1">
-             <div class="project-actions">
-    <!-- عدلت الرابط ليطابق الاسم الجديد للـPDF -->
-             <a class="btn" href="مشاريع/project-1.pdf" download>
-             <i class="fa-solid fa-download"></i> تحميل
-             </a>
-             </div>
-             </article>
+        <!-- ملاحظة: لأن اسم الملف فيه مسافة، يجب ترميزها بـ %20 -->
+        <img src="مشاريع/مشروع%201.jpg" class="project-image" alt="مشروع 1">
+        <div class="project-actions">
+          <!-- عدّلنا اسم الـPDF إلى project-1.pdf حسب ما ذكرت -->
+          <a class="btn" href="مشاريع/project-1.pdf" download>
+            <i class="fa-solid fa-download"></i> تحميل
+          </a>
 
+          <!-- زر عرض داخل مودال -->
+          <button type="button" class="btn view-btn" data-pdf="مشاريع/project-1.pdf" aria-label="مشاهدة">
+            <i class="fa-solid fa-eye"></i> مشاهدة
+          </button>
+        </div>
+      </article>
+
+      <!-- يمكنك تكرار الكارت لمشاريع أخرى مع تغيير المسارات -->
+      <!--
+      <article class="project-card">
+        <img src="مشاريع/مشروع%202.jpg" class="project-image" alt="مشروع 2">
+        <div class="project-actions">
+          <a class="btn" href="مشاريع/project-2.pdf" download><i class="fa-solid fa-download"></i> تحميل</a>
+          <button type="button" class="btn view-btn" data-pdf="مشاريع/project-2.pdf"><i class="fa-solid fa-eye"></i> مشاهدة</button>
+        </div>
+      </article>
+      -->
 
     </div>
   </section>
@@ -132,7 +153,7 @@
     const fallbackDownload = document.getElementById('fallbackDownload');
     const closeBtn         = document.getElementById('modalCloseBtn');
 
-    // فحص وجود الملف
+    // فحص وجود الملف قبل الفتح لتجنب مودال فارغ
     async function exists(url) {
       try {
         const r = await fetch(url, { method: 'HEAD' });
@@ -143,7 +164,6 @@
       }
     }
 
-    // فتح المودال
     function openPdfModal(pdfUrl) {
       viewer.setAttribute('src', pdfUrl);
       modalDownload.setAttribute('href', pdfUrl);
@@ -153,7 +173,6 @@
       document.body.style.overflow = 'hidden';
     }
 
-    // إغلاق المودال
     function closePdfModal() {
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden', 'true');
@@ -171,25 +190,25 @@
       if (e.key === 'Escape') closePdfModal();
     });
 
-    // تفويض أحداث للأزرار
+    // تشغيل زر المشاهدة
     document.body.addEventListener('click', async (e) => {
       const btn = e.target.closest('.view-btn');
       if (!btn) return;
-      e.preventDefault();
 
+      e.preventDefault();
       const pdfUrl = btn.getAttribute('data-pdf');
       if (!pdfUrl) {
-        console.warn('data-pdf مفقود');
+        console.warn('data-pdf مفقود على الزر', btn);
         return;
       }
 
-      // موبايل/iOS → افتح تبويب جديد
+      // فتح تبويب جديد على الشاشات الصغيرة / iOS
       const isSmall = window.matchMedia('(max-width:640px)').matches;
       const isIOS   = /iPad|iPhone|iPod/i.test(navigator.userAgent);
 
       const ok = await exists(pdfUrl);
       if (!ok) {
-        alert('تعذّر العثور على الملف. تحقق من الاسم/المسار.');
+        alert('تعذّر العثور على الملف. تحقق من الاسم/المسار (حسّاس لحالة الأحرف).');
         console.error('404 for', pdfUrl);
         return;
       }
@@ -199,7 +218,6 @@
         return;
       }
 
-      // سطح مكتب → مودال
       openPdfModal(pdfUrl);
     });
   });
