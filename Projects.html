@@ -3,18 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <!-- تعطيل الترجمة التلقائية لتقليل طلبات gstatic -->
   <meta name="google" content="notranslate" />
 
-  <!-- سياسة الأمان CSP: ضعها أول عنصر داخل <head> ولا تكرر أي وسم CSP آخر -->
+  <!-- CSP -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
     img-src 'self' data: https:;
     script-src 'self' 'unsafe-inline';
-    style-src 'self' 'unsafe-inline' https:;
-    style-src-elem 'self' 'unsafe-inline' https:;
-    font-src 'self' data: https:;
+    style-src 'self' 'unsafe-inline' https: https://fonts.googleapis.com;
+    style-src-elem 'self' 'unsafe-inline' https: https://fonts.googleapis.com;
+    font-src 'self' data: https://fonts.gstatic.com;
     frame-src 'self' blob: data: https://drive.google.com https://docs.google.com;
     connect-src 'self';
     object-src 'none';
@@ -24,17 +23,15 @@
 
   <title>مشاريع - عنان</title>
 
-  <!-- تحسين تحميل الخطوط -->
+  <!-- خطوط -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- خط Amiri -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome -->
+  <!-- أيقونات -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-  <!-- ملفات التنسيقات المحلية -->
+  <!-- CSS محلي -->
   <link rel="stylesheet" href="summary.css">
   <link rel="stylesheet" href="Projects.css">
 </head>
@@ -43,7 +40,7 @@
   <header class="header">
     <div class="container">
       <div class="logo-container">
-        <img src="img/لوغو%20فاتح.png" alt="لوغو عنان" class="logo-image">
+        <img src="img/logo-light.png" alt="لوغو عنان" class="logo-image">
       </div>
       <nav class="nav">
         <ul>
@@ -62,13 +59,13 @@
   </header>
 
   <!-- قسم المشاريع -->
-  <section class="projects-wrap" id="Projects" dir="rtl">
+  <section class="projects-wrap" id="Projects">
     <h2 class="projects-title">مشاريع</h2>
     <div class="projects-grid">
 
-      <!-- كارت مشروع (مشبوك على Google Drive) -->
+      <!-- مشروع 1 -->
       <article class="project-card">
-        <img src="مشاريع/مشروع%201.jpg" class="project-image" alt="مشروع 1">
+        <img src="projects/project-1.jpg" class="project-image" alt="مشروع 1">
         <div class="project-actions">
           <!-- تحميل مباشر من درايف -->
           <a class="btn"
@@ -76,8 +73,7 @@
              download>
             <i class="fa-solid fa-download"></i> تحميل
           </a>
-
-          <!-- مشاهدة داخل المودال عبر preview -->
+          <!-- مشاهدة داخل المودال -->
           <button type="button" class="btn view-btn"
                   data-pdf="https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/preview"
                   aria-label="مشاهدة">
@@ -86,21 +82,7 @@
         </div>
       </article>
 
-      <!-- نموذج للتكرار مع مشروع آخر (بدّل المعرف فقط)
-      <article class="project-card">
-        <img src="مشاريع/مشروع%202.jpg" class="project-image" alt="مشروع 2">
-        <div class="project-actions">
-          <a class="btn" href="https://drive.google.com/uc?export=download&id=PUT_FILE_ID_HERE" download>
-            <i class="fa-solid fa-download"></i> تحميل
-          </a>
-          <button type="button" class="btn view-btn"
-                  data-pdf="https://drive.google.com/file/d/PUT_FILE_ID_HERE/preview"
-                  aria-label="مشاهدة">
-            <i class="fa-solid fa-eye"></i> مشاهدة
-          </button>
-        </div>
-      </article>
-      -->
+      <!-- انسخ هذا البلوك لمشاريع أخرى وغيّر روابط Drive + الصور -->
 
     </div>
   </section>
@@ -155,40 +137,27 @@
       });
     }
 
-    const modal            = document.getElementById('pdfModal');
-    const viewer           = document.getElementById('pdfViewer');
-    const modalDownload    = document.getElementById('modalDownloadBtn');
+    const modal  = document.getElementById('pdfModal');
+    const viewer = document.getElementById('pdfViewer');
+    const modalDownload = document.getElementById('modalDownloadBtn');
     const fallbackDownload = document.getElementById('fallbackDownload');
-    const closeBtn         = document.getElementById('modalCloseBtn');
+    const closeBtn = document.getElementById('modalCloseBtn');
 
-    // هل الرابط من نفس الأصل؟
     function isSameOrigin(url) {
-      try {
-        const u = new URL(url, window.location.href);
-        return u.origin === window.location.origin;
-      } catch (e) {
-        return false;
-      }
+      try { const u = new URL(url, location.href); return u.origin === location.origin; }
+      catch { return false; }
     }
 
-    // فحص وجود الملف فقط للروابط المحلية (تجنّب CORS مع الروابط الخارجية مثل درايف)
     async function exists(url) {
-      if (!isSameOrigin(url)) {
-        return true; // اعتبره موجوداً عند كونه خارجي
-      }
-      try {
-        const r = await fetch(url, { method: 'HEAD' });
-        return r.ok;
-      } catch (e) {
-        console.error('Fetch HEAD failed for', url, e);
-        return false;
-      }
+      if (!isSameOrigin(url)) return true; // خارجي: اعتبره موجود
+      try { const r = await fetch(url, { method: 'HEAD' }); return r.ok; }
+      catch { return false; }
     }
 
     function openPdfModal(pdfPreviewUrl, downloadUrl) {
-      viewer.setAttribute('src', pdfPreviewUrl);
-      modalDownload.setAttribute('href', downloadUrl || pdfPreviewUrl);
-      fallbackDownload.setAttribute('href', downloadUrl || pdfPreviewUrl);
+      viewer.src = pdfPreviewUrl;
+      modalDownload.href = downloadUrl || pdfPreviewUrl;
+      fallbackDownload.href = downloadUrl || pdfPreviewUrl;
       modal.classList.add('show');
       modal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -197,52 +166,36 @@
     function closePdfModal() {
       modal.classList.remove('show');
       modal.setAttribute('aria-hidden', 'true');
-      viewer.setAttribute('src', '');
+      viewer.src = '';
       document.body.style.overflow = '';
     }
 
-    if (closeBtn) closeBtn.addEventListener('click', closePdfModal);
-    if (modal) {
-      modal.addEventListener('click', (e) => {
-        if (e.target === modal) closePdfModal();
-      });
-    }
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closePdfModal();
-    });
+    closeBtn && closeBtn.addEventListener('click', closePdfModal);
+    modal && modal.addEventListener('click', (e) => { if (e.target === modal) closePdfModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePdfModal(); });
 
-    // تشغيل زر المشاهدة
     document.body.addEventListener('click', async (e) => {
       const btn = e.target.closest('.view-btn');
       if (!btn) return;
 
       e.preventDefault();
       const pdfPreviewUrl = btn.getAttribute('data-pdf');
-      if (!pdfPreviewUrl) {
-        console.warn('data-pdf مفقود على الزر', btn);
-        return;
-      }
+      if (!pdfPreviewUrl) return;
 
-      // إن وُجد data-download استخدمه للتحميل داخل المودال
-      const dataDownload = btn.getAttribute('data-download');
-
-      // فتح تبويب جديد على الشاشات الصغيرة / iOS
-      const isSmall = window.matchMedia('(max-width:640px)').matches;
-      const isIOS   = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+      const isSmall = matchMedia('(max-width:640px)').matches;
+      const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
 
       const ok = await exists(pdfPreviewUrl);
       if (!ok) {
-        alert('تعذّر العثور على الملف. تحقق من الاسم/المسار (حسّاس لحالة الأحرف).');
-        console.error('404 for', pdfPreviewUrl);
+        alert('تعذّر العثور على الملف. تحقق من الرابط.');
         return;
       }
 
       if (isSmall || isIOS) {
         window.open(pdfPreviewUrl, '_blank', 'noopener');
-        return;
+      } else {
+        openPdfModal(pdfPreviewUrl, btn.getAttribute('data-download'));
       }
-
-      openPdfModal(pdfPreviewUrl, dataDownload);
     });
   });
   </script>
