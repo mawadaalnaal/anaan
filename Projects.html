@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="google" content="notranslate" />
-  <meta http-equiv="Content-Security-Policy" content="...">
-  <title>مشاريع - عنان</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المشاريع - عنان</title>
 
-  <!-- خطوط وأيقونات -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer">
-
-  <!-- ✅ استدعاء ملف الستايل الخارجي -->
+  <!-- ستايل عام -->
   <link rel="stylesheet" href="projects.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
   <!-- الهيدر -->
   <header class="header">
@@ -26,7 +17,7 @@
       <div class="logo-container">
         <img src="img/لوغو فاتح.png" alt="لوغو عنان" class="logo-image">
       </div>
-      <nav class="nav" aria-label="القائمة الرئيسية">
+      <nav class="nav">
         <ul>
           <li><a href="index.html">الرئيسية</a></li>
           <li><a href="quotations.html">الاقتباسات</a></li>
@@ -34,145 +25,59 @@
           <li><a href="documentation.html">التوثيق</a></li>
           <li><a href="videos.html">الفيديوهات</a></li>
           <li><a href="tahfizat.html">تحفيزات</a></li>
-          <li><a href="#projects">مشاريع</a></li>
+          <li><a href="projects.html" class="active">مشاريع</a></li>
           <li><a href="team.html">أعضاء الفريق</a></li>
         </ul>
       </nav>
-      <button class="menu-toggle" aria-label="فتح القائمة"><i class="fa-solid fa-bars"></i></button>
+      <div class="menu-toggle"><i class="fa-solid fa-bars"></i></div>
     </div>
   </header>
 
-  <!-- قسم المشاريع -->
-  <section class="projects-wrap" id="Projects">
+  <!-- المحتوى -->
+  <main class="main" id="projects">
     <div class="container">
-      <h2 class="projects-title">مشاريع</h2>
+      <div class="page-header">
+        <h2>مشاريعنا</h2>
+        <p>هنا تجد روابط المشاريع والملفات المهمة الخاصة بفريق <strong>عنان</strong>.</p>
+      </div>
 
-      <div class="projects-grid">
-
-      
-        <!-- مشروع 2 -->
-       
-
-
-
-
-
-        <!-- انسخ بلوك المشروع وبدّل الصور وروابط Drive -->
+      <!-- زر رابط الدرايف -->
+      <div class="drive-box">
+        <a href="https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/view?usp=drivesdk" target="_blank" class="drive-btn">
+          <i class="fa-brands fa-google-drive"></i> عرض المشروع على Google Drive
+        </a>
       </div>
     </div>
-  </section>
-
-  <!-- مودال PDF -->
-  <div class="pdf-modal" id="pdfModal" aria-hidden="true">
-    <div class="pdf-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="pdfTitle">
-      <div class="pdf-modal__header">
-        <h3 id="pdfTitle">عرض الملف</h3>
-        <div class="pdf-modal__tools">
-          <a id="modalDownloadBtn" class="btn small" href="#" download>
-            <i class="fa-solid fa-download"></i> تحميل
-          </a>
-          <button class="btn small ghost" id="modalCloseBtn" aria-label="إغلاق">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-        </div>
-      </div>
-      <div class="pdf-modal__body">
-        <iframe id="pdfViewer" class="pdf-frame" src="" title="PDF Viewer" allow="fullscreen"></iframe>
-        <p style="padding:10px">
-          إذا لم يظهر الملف يمكنك
-          <a id="fallbackDownload" href="#" download>تحميله من هنا</a>.
-        </p>
-      </div>
-    </div>
-  </div>
+  </main>
 
   <!-- الفوتر -->
   <footer class="footer" id="contact">
     <div class="social-links">
-      <a href="https://t.me/Alanan_Team" target="_blank" class="social-link" rel="noopener"><i class="fab fa-telegram"></i></a>
-      <a href="https://x.com/alananteam" target="_blank" class="social-link" rel="noopener"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://www.instagram.com/alanan.team" target="_blank" class="social-link" rel="noopener"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/Alanan_Team" target="_blank" class="social-link">
+        <i class="fab fa-telegram"></i>
+      </a>
+      <a href="https://x.com/alananteam" target="_blank" class="social-link">
+        <i class="fab fa-x-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com/alanan.team" target="_blank" class="social-link">
+        <i class="fab fa-instagram"></i>
+      </a>
     </div>
     <p class="copyright">
-      <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank" rel="noopener">
+      <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank">
         جميع الحقوق محفوظة © 2025 Mawadda Alnaal
       </a>
     </p>
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      // قائمة الموبايل
+    // JavaScript للتحكم في قائمة الموبايل
+    document.addEventListener('DOMContentLoaded', function() {
       const menuToggle = document.querySelector('.menu-toggle');
-      if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-          const navList = document.querySelector('.nav ul');
-          if (navList) navList.classList.toggle('show');
-        });
-      }
-
-      // عناصر المودال
-      const modal  = document.getElementById('pdfModal');
-      const viewer = document.getElementById('pdfViewer');
-      const modalDownload = document.getElementById('modalDownloadBtn');
-      const fallbackDownload = document.getElementById('fallbackDownload');
-      const closeBtn = document.getElementById('modalCloseBtn');
-
-      function isSameOrigin(url) {
-        try { const u = new URL(url, location.href); return u.origin === location.origin; }
-        catch { return false; }
-      }
-
-      async function exists(url) {
-        if (!isSameOrigin(url)) return true; // روابط Drive خارجية: اعتبرها موجودة
-        try { const r = await fetch(url, { method: 'HEAD' }); return r.ok; }
-        catch { return false; }
-      }
-
-      function openPdfModal(pdfPreviewUrl, downloadUrl) {
-        viewer.src = pdfPreviewUrl;
-        modalDownload.href = downloadUrl || pdfPreviewUrl;
-        fallbackDownload.href = downloadUrl || pdfPreviewUrl;
-        modal.classList.add('show');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closePdfModal() {
-        modal.classList.remove('show');
-        modal.setAttribute('aria-hidden', 'true');
-        viewer.src = '';
-        document.body.style.overflow = '';
-      }
-
-      closeBtn && closeBtn.addEventListener('click', closePdfModal);
-      modal && modal.addEventListener('click', (e) => { if (e.target === modal) closePdfModal(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePdfModal(); });
-
-      // فتح الـ PDF من أزرار "مشاهدة"
-      document.body.addEventListener('click', async (e) => {
-        const btn = e.target.closest('.view-btn');
-        if (!btn) return;
-
-        e.preventDefault();
-        const pdfPreviewUrl = btn.getAttribute('data-pdf');
-        if (!pdfPreviewUrl) return;
-
-        const isSmall = matchMedia('(max-width:640px)').matches;
-        const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
-
-        const ok = await exists(pdfPreviewUrl);
-        if (!ok) {
-          alert('تعذّر العثور على الملف. تحقق من الرابط.');
-          return;
-        }
-
-        // على الشاشات الصغيرة أو iOS افتح في تبويب جديد، غير ذلك داخل المودال
-        if (isSmall || isIOS) {
-          window.open(pdfPreviewUrl, '_blank', 'noopener');
-        } else {
-          openPdfModal(pdfPreviewUrl, btn.getAttribute('data-download'));
-        }
+      const navList = document.querySelector('.nav ul');
+      
+      menuToggle.addEventListener('click', function() {
+        navList.classList.toggle('show');
       });
     });
   </script>
