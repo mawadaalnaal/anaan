@@ -3,24 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-  
-  <meta http-equiv="Content-Security-Policy" content="
-  default-src 'self';
-  base-uri 'self';
-  frame-ancestors 'self';
-  img-src 'self' data: https:;
-  script-src 'self' 'unsafe-inline';
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://www.gstatic.com;
-  style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://www.gstatic.com;
-  font-src 'self' data: https://fonts.gstatic.com https://mawadaalnaal.github.io;
-  connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-  object-src 'none';
-  upgrade-insecure-requests;
-">
 
+  <!-- ✅ سياسة أمان مُعدّلة: تسمح بالخطوط والستايلات الضرورية وتمنع الباقي -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    frame-ancestors 'self';
+    img-src 'self' data: https:;
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' data: https://fonts.gstatic.com;
+    connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com;
+    frame-src 'self' https://drive.google.com;
+    object-src 'none';
+    upgrade-insecure-requests;
+  ">
 
   <title>المشاريع - عنان</title>
+
+  <!-- تحسين تحميل الخطوط -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <!-- ستايل عام -->
   <link rel="stylesheet" href="projects.css">
@@ -32,6 +36,7 @@
   <header class="header">
     <div class="container">
       <div class="logo-container">
+        <!-- ملاحظة: تأكدي أن اسم الملف بالضبط يطابق الريبو. إذا مخزن بـ %20 اكتبيه هكذا: img/لوغو%20فاتح.png -->
         <img src="img/لوغو فاتح.png" alt="لوغو عنان" class="logo-image">
       </div>
       <nav class="nav">
@@ -58,16 +63,25 @@
         <p>هنا تجد روابط المشاريع والملفات المهمة الخاصة بفريق <strong>عنان</strong>.</p>
       </div>
 
-      <!-- زر التحميل/المشاهدة من Google Drive -->
+      <!-- زر مشاهدة/تحميل من Google Drive (بسيط بدون تعبئة متحركة) -->
       <div class="btn-wrap">
+        <!-- للمشاهدة داخل درايف -->
         <button
           class="btn"
           type="button"
           onclick="location.href='https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/view?usp=drivesdk'">
-          <strong>Download Project</strong>
-          <div id="container-stars"><div id="stars"></div></div>
-          <div id="glow"><div class="circle"></div><div class="circle"></div></div>
+          <strong>فتح المشروع على Google Drive</strong>
         </button>
+
+        <!-- للتحميل المباشر (اختياري): فعّلي هذا واستبدلي الزر فوق إذا بدك تحميل مباشر -->
+        <!--
+        <button
+          class="btn"
+          type="button"
+          onclick="location.href='https://drive.google.com/uc?export=download&id=1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt'">
+          <strong>تحميل المشروع</strong>
+        </button>
+        -->
       </div>
     </div>
   </main>
@@ -93,7 +107,7 @@
   </footer>
 
   <script>
-    // JavaScript للتحكم في قائمة الموبايل
+    // قائمة الموبايل
     document.addEventListener('DOMContentLoaded', function() {
       const menuToggle = document.querySelector('.menu-toggle');
       const navList = document.querySelector('.nav ul');
