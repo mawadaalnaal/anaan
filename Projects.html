@@ -3,6 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    img-src 'self' data: https:;
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    frame-src 'self' blob: data:;
+    connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    object-src 'none';
+    upgrade-insecure-requests;
+  ">
+  
   <title>المشاريع - عنان</title>
 
   <!-- ستايل عام -->
@@ -41,18 +55,15 @@
         <p>هنا تجد روابط المشاريع والملفات المهمة الخاصة بفريق <strong>عنان</strong>.</p>
       </div>
 
-      <!-- زر التحميل من Google Drive -->
+      <!-- زر التحميل/المشاهدة من Google Drive -->
       <div class="btn-wrap">
-        <button class="btn" type="button" 
-          onclick="window.open('https://drive.google.com/uc?export=download&id=1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt')">
+        <button
+          class="btn"
+          type="button"
+          onclick="location.href='https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/view?usp=drivesdk'">
           <strong>Download Project</strong>
-          <div id="container-stars">
-            <div id="stars"></div>
-          </div>
-          <div id="glow">
-            <div class="circle"></div>
-            <div class="circle"></div>
-          </div>
+          <div id="container-stars"><div id="stars"></div></div>
+          <div id="glow"><div class="circle"></div><div class="circle"></div></div>
         </button>
       </div>
     </div>
@@ -72,7 +83,7 @@
       </a>
     </div>
     <p class="copyright">
-      <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank">
+      <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank" rel="noopener">
         جميع الحقوق محفوظة © 2025 Mawadda Alnaal
       </a>
     </p>
@@ -83,7 +94,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       const menuToggle = document.querySelector('.menu-toggle');
       const navList = document.querySelector('.nav ul');
-      
+
       menuToggle.addEventListener('click', function() {
         navList.classList.toggle('show');
       });
