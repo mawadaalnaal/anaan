@@ -5,19 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="google" content="notranslate" />
 
+  <!-- ✅ سياسة أمان محتوى مضبوطة لما تحتاجينه فقط -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    base-uri 'self';
+    frame-ancestors 'self';
+    img-src 'self' data: https:;
+    script-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+    font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+    object-src 'none';
+    upgrade-insecure-requests;
+  ">
+
   <title>عنان - الصفحة الرئيسية</title>
 
-  <!-- خطوط -->
+  <!-- تحسين تحميل الخطوط -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- خطوط Google -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome v6 -->
+  <!-- Font Awesome v6 من cdnjs -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <!-- ملف التنسيقات -->
+  <!-- ملف التنسيقات المحلي -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -25,21 +42,21 @@
   <header class="header">
     <div class="container">
       <div class="logo-container">
+        <!-- ملاحظة: إذا كان اسم الملف في الريبو باستخدام %20 فاستعمليه كما هو -->
         <img src="img/لوغو%20فاتح.png" alt="لوغو عنان" class="logo-image">
       </div>
 
       <!-- زر القائمة للموبايل -->
-      <button class="nav-toggle" aria-label="فتح القائمة">
+      <button class="nav-toggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="main-nav">
         <span class="hamburger"></span>
       </button>
 
-      <nav class="nav" aria-label="القائمة الرئيسية">
+      <nav class="nav" id="main-nav" aria-label="القائمة الرئيسية">
         <ul class="nav-list">
           <li><a href="#home">الرئيسية</a></li>
           <li><a href="#about">من نحن</a></li>
           <li><a href="#services">خدماتنا</a></li>
           <li><a href="#contact">اتصل بنا</a></li>
-          
         </ul>
       </nav>
     </div>
@@ -48,6 +65,7 @@
   <!-- المحتوى -->
   <main class="main" id="home">
     <div class="container">
+
       <!-- الغلاف -->
       <section class="hero-section">
         <div class="hero-box">
@@ -83,37 +101,37 @@
       <section class="cards-section" id="services">
         <h2 class="section-title">خدماتنا</h2>
         <div class="cards-grid">
-          <div class="card" onclick="window.location.href='quotations.html'">
+          <div class="card" role="link" tabindex="0" onclick="location.href='quotations.html'">
             <div class="card-icon"><i class="fa-solid fa-quote-left"></i></div>
             <h3>الاقتباسات</h3>
           </div>
 
-          <div class="card" onclick="window.location.href='summary.html'">
+          <div class="card" role="link" tabindex="0" onclick="location.href='summary.html'">
             <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
             <h3>التلخيص</h3>
           </div>
 
-          <div class="card" onclick="window.location.href='documentation.html'">
+          <div class="card" role="link" tabindex="0" onclick="location.href='documentation.html'">
             <div class="card-icon"><i class="fa-solid fa-file-lines"></i></div>
             <h3>التوثيق</h3>
           </div>
 
-          <div class="card" onclick="window.location.href='videos.html'">
+          <div class="card" role="link" tabindex="0" onclick="location.href='videos.html'">
             <div class="card-icon"><i class="fa-solid fa-circle-play"></i></div>
             <h3>الفيديوهات</h3>
           </div>
 
-          <div class="card" onclick="window.location.href='tahfizat.html'">
+          <div class="card" role="link" tabindex="0" onclick="location.href='tahfizat.html'">
             <div class="card-icon"><i class="fa-solid fa-envelope"></i></div>
             <h3>تحفيزات</h3>
           </div>
 
-           <div class="card" onclick="window.location.href='projects.html'">
-              <div class="card-icon"><i class="fa-solid fa-diagram-project"></i></div>
-               <h3>المشاريع</h3>
-              </div>
-              
-          <div class="card" onclick="window.location.href='team.html'">
+          <div class="card" role="link" tabindex="0" onclick="location.href='projects.html'">
+            <div class="card-icon"><i class="fa-solid fa-diagram-project"></i></div>
+            <h3>المشاريع</h3>
+          </div>
+
+          <div class="card" role="link" tabindex="0" onclick="location.href='team.html'">
             <div class="card-icon"><i class="fa-solid fa-users"></i></div>
             <h3>أعضاء الفريق</h3>
           </div>
@@ -126,13 +144,13 @@
   <footer class="footer" id="contact">
     <div class="social-links">
       <a href="https://t.me/Alanan_Team" target="_blank" class="social-link" rel="noopener">
-        <i class="fa-brands fa-telegram"></i>
+        <i class="fa-brands fa-telegram" aria-hidden="true"></i><span class="sr-only">Telegram</span>
       </a>
       <a href="https://x.com/alananteam" target="_blank" class="social-link" rel="noopener">
-        <i class="fa-brands fa-x-twitter"></i>
+        <i class="fa-brands fa-x-twitter" aria-hidden="true"></i><span class="sr-only">X</span>
       </a>
       <a href="https://www.instagram.com/alanan.team" target="_blank" class="social-link" rel="noopener">
-        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-instagram" aria-hidden="true"></i><span class="sr-only">Instagram</span>
       </a>
     </div>
 
@@ -144,21 +162,33 @@
   </footer>
 
   <script>
-    // قائمة الموبايل
+    // قائمة الموبايل + تحسين إمكانية الوصول
     document.addEventListener('DOMContentLoaded', function() {
       const navToggle = document.querySelector('.nav-toggle');
       const nav = document.querySelector('.nav');
 
       if (navToggle && nav) {
         navToggle.addEventListener('click', function() {
-          nav.classList.toggle('nav-open');
+          const isOpen = nav.classList.toggle('nav-open');
           navToggle.classList.toggle('active');
+          navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
 
         document.querySelectorAll('.nav a').forEach(link => {
           link.addEventListener('click', function() {
             nav.classList.remove('nav-open');
             navToggle.classList.remove('active');
+            navToggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+
+        // دعم Enter للبطاقات القابلة للنقر
+        document.querySelectorAll('.cards-grid .card[tabindex="0"]').forEach(card => {
+          card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              card.click();
+            }
           });
         });
       }
