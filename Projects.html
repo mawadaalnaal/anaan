@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="google" content="notranslate" />
-
-  <!-- CSP -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
@@ -20,20 +18,16 @@
     frame-ancestors 'none';
     upgrade-insecure-requests;
   ">
-
   <title>مشاريع - عنان</title>
 
-  <!-- خطوط -->
+  <!-- خطوط وأيقونات -->
+   <link rel="stylesheet" href="Projects.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- أيقونات -->
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-  <!-- CSS محلي -->
-  <link rel="stylesheet" href="summary.css">
-  <link rel="stylesheet" href="Projects.css">
+ 
 </head>
 <body>
   <!-- الهيدر -->
@@ -42,7 +36,7 @@
       <div class="logo-container">
         <img src="img/لوغو فاتح.png" alt="لوغو عنان" class="logo-image">
       </div>
-      <nav class="nav">
+      <nav class="nav" aria-label="القائمة الرئيسية">
         <ul>
           <li><a href="index.html">الرئيسية</a></li>
           <li><a href="quotations.html">الاقتباسات</a></li>
@@ -50,7 +44,7 @@
           <li><a href="documentation.html">التوثيق</a></li>
           <li><a href="videos.html">الفيديوهات</a></li>
           <li><a href="tahfizat.html">تحفيزات</a></li>
-          <li><a href="projects.html">مشاريع</a></li>
+          <li><a class="active" href="projects.html">مشاريع</a></li>
           <li><a href="team.html">أعضاء الفريق</a></li>
         </ul>
       </nav>
@@ -60,36 +54,43 @@
 
   <!-- قسم المشاريع -->
   <section class="projects-wrap" id="Projects">
-    <h2 class="projects-title">مشاريع</h2>
-    <div class="projects-grid">
+    <div class="container">
+      <h2 class="projects-title">مشاريع</h2>
 
-      <!-- مشروع 1 -->
-      <article class="project-card">
-        <img src="projects/project-1.jpg" class="project-image" alt="مشروع 1">
-        <div class="project-actions">
-          <!-- تحميل مباشر من درايف -->
-          <a class="btn"
-             href="https://drive.google.com/uc?export=download&id=1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt"
-             download>
-            <i class="fa-solid fa-download"></i> تحميل
-          </a>
-          <!-- مشاهدة داخل المودال -->
-          <button type="button" class="btn view-btn"
-                  data-pdf="https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/preview"
-                  aria-label="مشاهدة">
-            <i class="fa-solid fa-eye"></i> مشاهدة
-          </button>
-        </div>
-      </article>
+      <div class="projects-grid">
 
-      <!-- انسخ هذا البلوك لمشاريع أخرى وغيّر روابط Drive + الصور -->
+        <!-- مشروع 1 -->
+        <article class="project-card">
+          <img src="projects/project-1.jpg" class="project-image" alt="مشروع 1">
+          <div class="project-actions">
+            <a class="btn"
+               href="https://drive.google.com/uc?export=download&id=1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt"
+               download>
+              <i class="fa-solid fa-download"></i> تحميل
+            </a>
+            <button type="button" class="btn view-btn"
+                    data-pdf="https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/preview"
+                    aria-label="مشاهدة">
+              <i class="fa-solid fa-eye"></i> مشاهدة
+            </button>
+          </div>
+        </article>
 
+        <!-- مشروع 2 -->
+       
+
+
+
+
+        
+        <!-- انسخ بلوك المشروع وبدّل الصور وروابط Drive -->
+      </div>
     </div>
   </section>
 
   <!-- مودال PDF -->
   <div class="pdf-modal" id="pdfModal" aria-hidden="true">
-    <div class="pdf-modal__dialog">
+    <div class="pdf-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="pdfTitle">
       <div class="pdf-modal__header">
         <h3 id="pdfTitle">عرض الملف</h3>
         <div class="pdf-modal__tools">
@@ -125,79 +126,81 @@
     </p>
   </footer>
 
-  <!-- سكربت -->
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // قائمة الموبايل
-    const menuToggle = document.querySelector('.menu-toggle');
-    if (menuToggle) {
-      menuToggle.addEventListener('click', () => {
-        const navList = document.querySelector('.nav ul');
-        if (navList) navList.classList.toggle('show');
+    document.addEventListener('DOMContentLoaded', () => {
+      // قائمة الموبايل
+      const menuToggle = document.querySelector('.menu-toggle');
+      if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+          const navList = document.querySelector('.nav ul');
+          if (navList) navList.classList.toggle('show');
+        });
+      }
+
+      // عناصر المودال
+      const modal  = document.getElementById('pdfModal');
+      const viewer = document.getElementById('pdfViewer');
+      const modalDownload = document.getElementById('modalDownloadBtn');
+      const fallbackDownload = document.getElementById('fallbackDownload');
+      const closeBtn = document.getElementById('modalCloseBtn');
+
+      function isSameOrigin(url) {
+        try { const u = new URL(url, location.href); return u.origin === location.origin; }
+        catch { return false; }
+      }
+
+      async function exists(url) {
+        if (!isSameOrigin(url)) return true; // روابط Drive خارجية: اعتبرها موجودة
+        try { const r = await fetch(url, { method: 'HEAD' }); return r.ok; }
+        catch { return false; }
+      }
+
+      function openPdfModal(pdfPreviewUrl, downloadUrl) {
+        viewer.src = pdfPreviewUrl;
+        modalDownload.href = downloadUrl || pdfPreviewUrl;
+        fallbackDownload.href = downloadUrl || pdfPreviewUrl;
+        modal.classList.add('show');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closePdfModal() {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+        viewer.src = '';
+        document.body.style.overflow = '';
+      }
+
+      closeBtn && closeBtn.addEventListener('click', closePdfModal);
+      modal && modal.addEventListener('click', (e) => { if (e.target === modal) closePdfModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePdfModal(); });
+
+      // فتح الـ PDF من أزرار "مشاهدة"
+      document.body.addEventListener('click', async (e) => {
+        const btn = e.target.closest('.view-btn');
+        if (!btn) return;
+
+        e.preventDefault();
+        const pdfPreviewUrl = btn.getAttribute('data-pdf');
+        if (!pdfPreviewUrl) return;
+
+        const isSmall = matchMedia('(max-width:640px)').matches;
+        const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
+
+        const ok = await exists(pdfPreviewUrl);
+        if (!ok) {
+          alert('تعذّر العثور على الملف. تحقق من الرابط.');
+          return;
+        }
+
+        // على الشاشات الصغيرة أو iOS افتح في تبويب جديد، غير ذلك داخل المودال
+        if (isSmall || isIOS) {
+          window.open(pdfPreviewUrl, '_blank', 'noopener');
+        } else {
+          openPdfModal(pdfPreviewUrl, btn.getAttribute('data-download'));
+        }
       });
-    }
-
-    const modal  = document.getElementById('pdfModal');
-    const viewer = document.getElementById('pdfViewer');
-    const modalDownload = document.getElementById('modalDownloadBtn');
-    const fallbackDownload = document.getElementById('fallbackDownload');
-    const closeBtn = document.getElementById('modalCloseBtn');
-
-    function isSameOrigin(url) {
-      try { const u = new URL(url, location.href); return u.origin === location.origin; }
-      catch { return false; }
-    }
-
-    async function exists(url) {
-      if (!isSameOrigin(url)) return true; // خارجي: اعتبره موجود
-      try { const r = await fetch(url, { method: 'HEAD' }); return r.ok; }
-      catch { return false; }
-    }
-
-    function openPdfModal(pdfPreviewUrl, downloadUrl) {
-      viewer.src = pdfPreviewUrl;
-      modalDownload.href = downloadUrl || pdfPreviewUrl;
-      fallbackDownload.href = downloadUrl || pdfPreviewUrl;
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closePdfModal() {
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden', 'true');
-      viewer.src = '';
-      document.body.style.overflow = '';
-    }
-
-    closeBtn && closeBtn.addEventListener('click', closePdfModal);
-    modal && modal.addEventListener('click', (e) => { if (e.target === modal) closePdfModal(); });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePdfModal(); });
-
-    document.body.addEventListener('click', async (e) => {
-      const btn = e.target.closest('.view-btn');
-      if (!btn) return;
-
-      e.preventDefault();
-      const pdfPreviewUrl = btn.getAttribute('data-pdf');
-      if (!pdfPreviewUrl) return;
-
-      const isSmall = matchMedia('(max-width:640px)').matches;
-      const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
-
-      const ok = await exists(pdfPreviewUrl);
-      if (!ok) {
-        alert('تعذّر العثور على الملف. تحقق من الرابط.');
-        return;
-      }
-
-      if (isSmall || isIOS) {
-        window.open(pdfPreviewUrl, '_blank', 'noopener');
-      } else {
-        openPdfModal(pdfPreviewUrl, btn.getAttribute('data-download'));
-      }
     });
-  });
   </script>
 </body>
 </html>

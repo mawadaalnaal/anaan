@@ -1,99 +1,206 @@
-:root{
-    --brand:#111d4e;      /* لون الأزرار */
-    --bg:#f3f5f7;         /* خلفية خفيفة للقسم */
-    --card-bg:#fff;
-    --shadow:0 10px 28px rgba(0,0,0,.08);
-  }
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* غلاف القسم والعنوان */
-  .projects-wrap{
-    background:var(--bg);
-    padding:40px 20px;
-  }
-  .projects-title{
-    text-align:center;
-    margin-bottom:24px;
-    font-size:28px;
-    color:#000d2a;
-  }
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-  /* الشبكة: 3 بالسطر (ديسكتوب) */
-  .projects-grid{
-    max-width:1300px;
-    margin:0 auto;
-    display:grid;
-    grid-template-columns:repeat(3, minmax(0,1fr));
-    gap:26px;
-  }
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-  /* الكارت */
-  .project-card{
-    background:var(--card-bg);
-    border-radius:16px;
-    box-shadow:var(--shadow);
-    overflow:hidden;
-    padding:18px;
-    transition:transform .18s ease;
-  }
-  .project-card:hover{ transform:translateY(-6px); }
+    /* الهيدر */
+    .header {
+      background: #000d2a;
+      color: white;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
 
-  /* الصورة (شكل صفحة A4 تقريبًا) */
-  .project-image{
-    width:100%;
-    height:420px;         /* عدّلها حسب صورك */
-    object-fit:cover;     /* لو بدك كل الصفحة بدون قص: contain مع خلفية */
-    border-radius:12px;
-    display:block;
-    background:#eef1f5;   /* خلفية خفيفة لو في فراغ مع contain */
-  }
+    .header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
 
-  /* الأزرار أسفل الصورة */
-  .project-actions{
-    margin-top:12px;
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-  .btn{
-    border:none; cursor:pointer;
-    padding:.6rem .9rem; border-radius:10px;
-    font-size:1rem; display:inline-flex; align-items:center; gap:.5rem;
-    text-decoration:none; background:var(--brand); color:#fff;
-    transition: transform .06s ease, opacity .2s ease;
-  }
-  .btn:hover{ opacity:.92; }
-  .btn:active{ transform:scale(.98); }
-  .btn.small{ padding:.45rem .7rem; font-size:.9rem; }
-  .btn.ghost{ background:transparent; color:#111; border:1px solid #ddd; }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-  /* نافذة عرض الـPDF */
-  .pdf-modal{
-    position:fixed; inset:0; background:rgba(0,0,0,.5);
-    display:none; align-items:center; justify-content:center;
-    padding:1rem; z-index:1000;
-  }
-  .pdf-modal.show{ display:flex; }
-  .pdf-modal__dialog{
-    width:min(100%,980px); max-height:90vh; background:#fff;
-    border-radius:14px; overflow:hidden; display:flex; flex-direction:column;
-  }
-  .pdf-modal__header{
-    display:flex; align-items:center; justify-content:space-between; gap:1rem;
-    padding:.75rem 1rem; border-bottom:1px solid #eee;
-  }
-  .pdf-modal__tools{ display:inline-flex; gap:.5rem; }
-  .pdf-modal__body{ height:80vh; }
-  .pdf-frame{ width:100%; height:100%; border:none; display:block; }
+    .logo-image {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
 
-  /* تجاوب: 2 بالسطر للتابلت، 1 للموبايل */
-  @media (max-width:1100px){
-    .projects-grid{ grid-template-columns:repeat(2, minmax(0,1fr)); }
-    .project-image{ height:380px; }
-  }
-  @media (max-width:640px){
-    .projects-grid{ grid-template-columns:1fr; }
-    .project-image{ height:360px; }
-  }
+    .nav ul {
+      display: flex;
+      list-style: none;
+      gap: 15px;
+    }
 
-  
+    .nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 15px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .nav a:hover, .nav a.active {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    /* المحتوى */
+    .main {
+      padding: 3rem 0;
+      flex: 1;
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #000d2a;
+    }
+
+    .page-header h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* شبكة الملخصات */
+    .summary-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 3 صور في السطر */
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .summary-item img {
+      width: 100%;
+      max-width: 300px; /* حجم مناسب */
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .summary-item img:hover {
+      transform: scale(1.05);
+    }
+
+    /* الفوتر */
+    .footer {
+      background: #000d2a;
+      color: white;
+      padding: 2rem 0;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .social-link {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+      color: #bac2d2;
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      color: #bdc3c7;
+      margin-top: 1rem;
+    }
+
+    .copyright a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .copyright a:hover {
+      color: #c0f3ff;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .summary-gallery {
+        grid-template-columns: repeat(2, 1fr); /* صورتين في السطر */
+      }
+
+      .nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #000d2a;
+        width: 100%;
+        text-align: center;
+        padding: 1rem 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+
+      .nav ul.show {
+        display: flex !important;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .summary-gallery {
+        grid-template-columns: 1fr; /* صورة واحدة في السطر */
+      }
+
+      .logo-image {
+        width: 40px;
+        height: 40px;
+      }
+
+      .page-header h2 {
+        font-size: 1.5rem;
+      }
+    }
