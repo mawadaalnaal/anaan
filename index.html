@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="google" content="notranslate" />
 
-  <!-- ✅ CSP منقّحة للعمل داخل <meta> -->
-  <!-- ملاحظة: إن احتجت frame-ancestors استخدم هيدر من السيرفر، وليس <meta> -->
+  <!-- ✅ CSP منقّحة -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
@@ -14,7 +13,7 @@
     script-src 'self' 'unsafe-inline';
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
     style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-    font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://use.fontawesome.com;
+    font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com;
     frame-src 'self' blob: data:;
     connect-src 'self';
     object-src 'none';
@@ -28,13 +27,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome (مصدر واحد) -->
+  <!-- Font Awesome v6 -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-        integrity="sha512-xh6giXWvV6zv9p0oKXrF2XK9e0c7kZ5N2yq2bqgq0m5Wg3sV6qU9Z8l5r5KeJfQ8Q1e2b3wX9Y6bQbq+X5l9g=="
         crossorigin="anonymous" referrerpolicy="no-referrer">
 
-  <!-- ملف التنسيقات المحلي -->
+  <!-- ملف التنسيقات -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -42,7 +40,6 @@
   <header class="header">
     <div class="container">
       <div class="logo-container">
-        <!-- تأكد من اسم الملف بالضبط داخل مجلد img -->
         <img src="img/لوغو%20فاتح.png" alt="لوغو عنان" class="logo-image">
       </div>
 
@@ -57,7 +54,6 @@
           <li><a href="#about">من نحن</a></li>
           <li><a href="#services">خدماتنا</a></li>
           <li><a href="#contact">اتصل بنا</a></li>
-          <!-- ✅ رابط صفحة المشاريع بصيغة نسبية وحروف صغيرة -->
           <li><a href="projects.html">مشاريع</a></li>
         </ul>
       </nav>
@@ -72,19 +68,14 @@
         <div class="hero-box">
           <div class="hero-cover">
             <picture>
-              <!-- صورة للموبايل -->
-              <source
-                srcset="img/غلاف%20حجم%20موبايل.png"
-                media="(max-width: 768px)"
-                type="image/png">
-              <!-- صورة للديسكتوب -->
+              <source srcset="img/غلاف%20حجم%20موبايل.png" media="(max-width: 768px)" type="image/png">
               <img src="img/غلاف.png" alt="غلاف عنان" class="cover-image">
             </picture>
           </div>
         </div>
       </section>
 
-      <!-- قسم من نحن -->
+      <!-- من نحن -->
       <section class="about-section" id="about">
         <div class="container">
           <h2 class="section-title">من نحن</h2>
@@ -103,45 +94,45 @@
         </div>
       </section>
 
-      <!-- الكروت -->
+      <!-- خدماتنا -->
       <section class="cards-section" id="services">
         <h2 class="section-title">خدماتنا</h2>
         <div class="cards-grid">
           <div class="card" onclick="window.location.href='quotations.html'">
-            <div class="card-icon"><i class="fas fa-quote-left"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-quote-left"></i></div>
             <h3>الاقتباسات</h3>
           </div>
 
           <div class="card" onclick="window.location.href='summary.html'">
-            <div class="card-icon"><i class="fas fa-lightbulb"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-lightbulb"></i></div>
             <h3>التلخيص</h3>
           </div>
 
           <div class="card" onclick="window.location.href='documentation.html'">
-            <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-file-lines"></i></div>
             <h3>التوثيق</h3>
           </div>
 
           <div class="card" onclick="window.location.href='videos.html'">
-            <div class="card-icon"><i class="fas fa-play-circle"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-circle-play"></i></div>
             <h3>الفيديوهات</h3>
           </div>
 
           <div class="card" onclick="window.location.href='tahfizat.html'">
-            <div class="card-icon"><i class="fas fa-envelope"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-envelope"></i></div>
             <h3>تحفيزات</h3>
           </div>
 
           <div class="card" onclick="window.location.href='projects.html'">
-            <div class="card-icon"><i class="fas fa-project-diagram"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-diagram-project"></i></div>
             <h3>مشاريع</h3>
           </div>
 
           <div class="card" onclick="window.location.href='team.html'">
-            <div class="card-icon"><i class="fas fa-users"></i></div>
+            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
             <h3>أعضاء الفريق</h3>
           </div>
-        </div> <!-- ✅ إغلاق cards-grid -->
+        </div>
       </section>
     </div>
   </main>
@@ -149,9 +140,15 @@
   <!-- الفوتر -->
   <footer class="footer" id="contact">
     <div class="social-links">
-      <a href="https://t.me/Alanan_Team" target="_blank" class="social-link" rel="noopener"><i class="fab fa-telegram"></i></a>
-      <a href="https://x.com/alananteam" target="_blank" class="social-link" rel="noopener"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://www.instagram.com/alanan.team?igsh=MXFweW5kN3dwYnZsNA%3D%3D" target="_blank" class="social-link" rel="noopener"><i class="fab fa-instagram"></i></a>
+      <a href="https://t.me/Alanan_Team" target="_blank" class="social-link" rel="noopener">
+        <i class="fa-brands fa-telegram"></i>
+      </a>
+      <a href="https://x.com/alananteam" target="_blank" class="social-link" rel="noopener">
+        <i class="fa-brands fa-x-twitter"></i>
+      </a>
+      <a href="https://www.instagram.com/alanan.team" target="_blank" class="social-link" rel="noopener">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
     </div>
 
     <p class="copyright">
@@ -162,7 +159,7 @@
   </footer>
 
   <script>
-    // فتح/إغلاق قائمة الموبايل
+    // قائمة الموبايل
     document.addEventListener('DOMContentLoaded', function() {
       const navToggle = document.querySelector('.nav-toggle');
       const nav = document.querySelector('.nav');
@@ -173,7 +170,6 @@
           navToggle.classList.toggle('active');
         });
 
-        // إغلاق القائمة عند النقر على رابط
         document.querySelectorAll('.nav a').forEach(link => {
           link.addEventListener('click', function() {
             nav.classList.remove('nav-open');
