@@ -4,31 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="google" content="notranslate" />
-  <meta http-equiv="Content-Security-Policy" content="
-    default-src 'self';
-    base-uri 'self';
-    img-src 'self' data: https:;
-    script-src 'self' 'unsafe-inline';
-    style-src 'self' 'unsafe-inline' https: https://fonts.googleapis.com;
-    style-src-elem 'self' 'unsafe-inline' https: https://fonts.googleapis.com;
-    font-src 'self' data: https://fonts.gstatic.com;
-    frame-src 'self' blob: data: https://drive.google.com https://docs.google.com;
-    connect-src 'self';
-    object-src 'none';
-    frame-ancestors 'none';
-    upgrade-insecure-requests;
-  ">
+  <meta http-equiv="Content-Security-Policy" content="...">
   <title>مشاريع - عنان</title>
 
   <!-- خطوط وأيقونات -->
-   <link rel="stylesheet" href="projects.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
- 
+  <!-- ✅ استدعاء ملف الستايل الخارجي -->
+  <link rel="stylesheet" href="projects.css">
 </head>
+
 <body>
   <!-- الهيدر -->
   <header class="header">
