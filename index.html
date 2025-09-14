@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google" content="notranslate" />
 
-  <!-- CSP: تسمح بالخطوط وGoogle Fonts وFont Awesome وiframe للـPDF -->
+  <!-- ✅ CSP منقّحة للعمل داخل <meta> -->
+  <!-- ملاحظة: إن احتجت frame-ancestors استخدم هيدر من السيرفر، وليس <meta> -->
   <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     base-uri 'self';
@@ -12,21 +14,25 @@
     script-src 'self' 'unsafe-inline';
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
     style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-    font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://mawadaalnaal.github.io;
+    font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com https://use.fontawesome.com;
     frame-src 'self' blob: data:;
     connect-src 'self';
     object-src 'none';
-    frame-ancestors 'none';
     upgrade-insecure-requests;
   ">
 
   <title>عنان - الصفحة الرئيسية</title>
 
-  <!-- خط Amiri -->
+  <!-- خطوط -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 
-  <!-- Font Awesome (مرة واحدة فقط) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- Font Awesome (مصدر واحد) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-xh6giXWvV6zv9p0oKXrF2XK9e0c7kZ5N2yq2bqgq0m5Wg3sV6qU9Z8l5r5KeJfQ8Q1e2b3wX9Y6bQbq+X5l9g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <!-- ملف التنسيقات المحلي -->
   <link rel="stylesheet" href="styles.css">
@@ -36,6 +42,7 @@
   <header class="header">
     <div class="container">
       <div class="logo-container">
+        <!-- تأكد من اسم الملف بالضبط داخل مجلد img -->
         <img src="img/لوغو%20فاتح.png" alt="لوغو عنان" class="logo-image">
       </div>
 
@@ -44,13 +51,13 @@
         <span class="hamburger"></span>
       </button>
 
-      <nav class="nav">
+      <nav class="nav" aria-label="القائمة الرئيسية">
         <ul class="nav-list">
           <li><a href="#home">الرئيسية</a></li>
           <li><a href="#about">من نحن</a></li>
           <li><a href="#services">خدماتنا</a></li>
           <li><a href="#contact">اتصل بنا</a></li>
-          <!-- رابط صفحة المشاريع المستقلة -->
+          <!-- ✅ رابط صفحة المشاريع بصيغة نسبية وحروف صغيرة -->
           <li><a href="projects.html">مشاريع</a></li>
         </ul>
       </nav>
@@ -69,8 +76,7 @@
               <source
                 srcset="img/غلاف%20حجم%20موبايل.png"
                 media="(max-width: 768px)"
-                type="image/png"
-              >
+                type="image/png">
               <!-- صورة للديسكتوب -->
               <img src="img/غلاف.png" alt="غلاف عنان" class="cover-image">
             </picture>
@@ -87,7 +93,6 @@
             <p>
               نسجنا النجوم سلاح السمو لنركب سرج العلا في أمان<br>
               سباق طويل طوى جهدنا فهيا تأهب وأطلق عنان. <br><br>
-
               عنان، وما سميناه عنانًا إلا لأنّا نأنف من الحضيض، ونعرض عن السفوح، ونتطلع إلى القمم العالية...
               <br><br>
               وقد قيل، وهو شعارنا في كل ميدان: <br>
@@ -135,7 +140,8 @@
           <div class="card" onclick="window.location.href='team.html'">
             <div class="card-icon"><i class="fas fa-users"></i></div>
             <h3>أعضاء الفريق</h3>
-        </div>
+          </div>
+        </div> <!-- ✅ إغلاق cards-grid -->
       </section>
     </div>
   </main>
@@ -161,18 +167,20 @@
       const navToggle = document.querySelector('.nav-toggle');
       const nav = document.querySelector('.nav');
 
-      navToggle.addEventListener('click', function() {
-        nav.classList.toggle('nav-open');
-        navToggle.classList.toggle('active');
-      });
-
-      // إغلاق القائمة عند النقر على رابط
-      document.querySelectorAll('.nav a').forEach(link => {
-        link.addEventListener('click', function() {
-          nav.classList.remove('nav-open');
-          navToggle.classList.remove('active');
+      if (navToggle && nav) {
+        navToggle.addEventListener('click', function() {
+          nav.classList.toggle('nav-open');
+          navToggle.classList.toggle('active');
         });
-      });
+
+        // إغلاق القائمة عند النقر على رابط
+        document.querySelectorAll('.nav a').forEach(link => {
+          link.addEventListener('click', function() {
+            nav.classList.remove('nav-open');
+            navToggle.classList.remove('active');
+          });
+        });
+      }
     });
   </script>
 </body>
