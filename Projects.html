@@ -3,16 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
   <title>المشاريع - عنان</title>
 
-  <!-- تحسين تحميل الخطوط -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- ستايل عام -->
+  <!-- ستايل خارجي -->
   <link rel="stylesheet" href="projects.css">
+
+  <!-- أيقونات -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -21,7 +17,6 @@
   <header class="header">
     <div class="container">
       <div class="logo-container">
-        <!-- ملاحظة: تأكدي أن اسم الملف بالضبط يطابق الريبو. إذا مخزن بـ %20 اكتبيه هكذا: img/لوغو%20فاتح.png -->
         <img src="img/لوغو فاتح.png" alt="لوغو عنان" class="logo-image">
       </div>
       <nav class="nav">
@@ -48,22 +43,17 @@
         <p>هنا تجد روابط المشاريع والملفات المهمة الخاصة بفريق <strong>عنان</strong>.</p>
       </div>
 
-     <div class="but">
-              
-        
-                <button class="btn" type="button" onclick="window.open('https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/view?usp=drivesdk://drive.google.com/uc?export=download&id=1y8JUjzPy66ZWpt40nAqXGZNacF0gDTgJ')">
-                    <strong> تحميل مشروع على منهاج النبوة</strong>
-                    <div id="container-stars">
-                        <div id="stars"></div>
-                    </div>
-                    <div id="glow">
-                        <div class="circle"></div>
-                        <div class="circle"></div>
-                    </div>
-                </button>
-            </div>
+      <!-- الأزرار -->
+      <div class="btn-wrap">
+        <!-- تحميل مباشر -->
+        <a class="btn" href="https://drive.google.com/uc?export=download&id=1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt" rel="noopener">
+          <strong>تحميل المشروع</strong>
+        </a>
 
-   
+        <!-- مشاهدة على Google Drive -->
+        <a class="btn btn-outline" href="https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/view?usp=sharing" target="_blank" rel="noopener">
+          <strong>مشاهدة المشروع</strong>
+        </a>
       </div>
     </div>
   </main>
@@ -71,15 +61,9 @@
   <!-- الفوتر -->
   <footer class="footer" id="contact">
     <div class="social-links">
-      <a href="https://t.me/Alanan_Team" target="_blank" class="social-link">
-        <i class="fab fa-telegram"></i>
-      </a>
-      <a href="https://x.com/alananteam" target="_blank" class="social-link">
-        <i class="fab fa-x-twitter"></i>
-      </a>
-      <a href="https://www.instagram.com/alanan.team" target="_blank" class="social-link">
-        <i class="fab fa-instagram"></i>
-      </a>
+      <a href="https://t.me/Alanan_Team" target="_blank" class="social-link"><i class="fab fa-telegram"></i></a>
+      <a href="https://x.com/alananteam" target="_blank" class="social-link"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com/alanan.team" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
     </div>
     <p class="copyright">
       <a href="https://mawadaalnaal.github.io/portfolio/" target="_blank" rel="noopener">
@@ -93,7 +77,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       const menuToggle = document.querySelector('.menu-toggle');
       const navList = document.querySelector('.nav ul');
-
       menuToggle.addEventListener('click', function() {
         navList.classList.toggle('show');
       });

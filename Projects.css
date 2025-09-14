@@ -12,7 +12,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
 }
 
 .container {
@@ -40,17 +39,10 @@ body {
   position: relative;
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
 .logo-image {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .nav ul {
@@ -62,11 +54,9 @@ body {
 .nav a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
   padding: 8px 15px;
   border-radius: 20px;
   transition: all 0.3s ease;
-  font-size: 16px;
 }
 
 .nav a:hover, .nav a.active {
@@ -81,7 +71,6 @@ body {
   color: white;
   font-size: 24px;
   cursor: pointer;
-  z-index: 1001;
 }
 
 /* المحتوى */
@@ -101,27 +90,49 @@ body {
   margin-bottom: 0.5rem;
 }
 
-/* زر التحميل */
+/* الأزرار */
 .btn-wrap {
   display: flex;
   justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
   margin-top: 2rem;
 }
 
 .btn {
-  border: none;
-  background: #000d2a; /* اللون الأساسي */
+  display: inline-block;
+  background: #000d2a;
   color: #fff;
-  padding: 15px 30px;
+  padding: 14px 26px;
   border-radius: 30px;
-  cursor: pointer;
+  text-decoration: none;
   font-size: 16px;
   font-weight: 600;
   transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,13,42,.18);
 }
 
 .btn:hover {
-  background: #1c2c5d; /* لون عند التمرير */
+  background: #1c2c5d;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(0,13,42,.24);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 14px rgba(0,13,42,.18);
+}
+
+.btn.btn-outline {
+  background: transparent;
+  color: #000d2a;
+  border: 2px solid #000d2a;
+  box-shadow: none;
+}
+
+.btn.btn-outline:hover {
+  background: #000d2a;
+  color: #fff;
   transform: translateY(-2px);
 }
 
@@ -160,7 +171,6 @@ body {
 .copyright a {
   color: #fff;
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
 .copyright a:hover {
@@ -179,7 +189,6 @@ body {
     width: 100%;
     text-align: center;
     padding: 1rem 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
 
   .nav ul.show {
