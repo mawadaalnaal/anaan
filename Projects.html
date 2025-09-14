@@ -25,7 +25,7 @@
           <li><a href="documentation.html">التوثيق</a></li>
           <li><a href="videos.html">الفيديوهات</a></li>
           <li><a href="tahfizat.html">تحفيزات</a></li>
-          <li><a href="#projects" class="active">مشاريع</a></li>
+          <li><a href="projects.html" class="active">مشاريع</a></li>
           <li><a href="team.html">أعضاء الفريق</a></li>
         </ul>
       </nav>
@@ -41,11 +41,19 @@
         <p>هنا تجد روابط المشاريع والملفات المهمة الخاصة بفريق <strong>عنان</strong>.</p>
       </div>
 
-      <!-- زر رابط الدرايف -->
-      <div class="drive-box">
-        <a href="https://drive.google.com/file/d/1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt/view?usp=drivesdk" target="_blank" class="drive-btn">
-          <i class="fa-brands fa-google-drive"></i> عرض المشروع على Google Drive
-        </a>
+      <!-- زر التحميل من Google Drive -->
+      <div class="btn-wrap">
+        <button class="btn" type="button" 
+          onclick="window.open('https://drive.google.com/uc?export=download&id=1Bp_L3_Qha0jS0_vabW9ve71Pxsu1mTBt')">
+          <strong>Download Project</strong>
+          <div id="container-stars">
+            <div id="stars"></div>
+          </div>
+          <div id="glow">
+            <div class="circle"></div>
+            <div class="circle"></div>
+          </div>
+        </button>
       </div>
     </div>
   </main>
